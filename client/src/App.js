@@ -8,13 +8,19 @@ class App extends Component {
   componentDidMount() {
     axios.get("/test").then(res => this.setState({ user: res.data }));
   }
-
+  login = e => {
+    // e.preventDefault();
+    // axios.get("/auth/google").then(res => console.log(res.data));
+  };
   render() {
     return (
       <div>
-        user:
-        {this.state.user &&
-          this.state.user.map(item => <span key={item._id}>{item.date}</span>)}
+        <a
+          href="http://localhost:5000/auth/google"
+          onClick={e => this.login(e)}
+        >
+          Login G
+        </a>
       </div>
     );
   }
