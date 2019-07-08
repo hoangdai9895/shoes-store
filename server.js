@@ -7,15 +7,21 @@ require("dotenv").config();
 
 const app = express();
 
-const auth = require("./routes/auth");
+const auth = require("./routes/user");
+const brand = require("./routes/brand");
+const type = require("./routes/type");
+const product = require("./routes/product");
 
 // body parser middleaware
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // connect db
 mongoose
-    .connect(process.env.MONGOURL, { useNewUrlParser: true })
+    .connect(process.env.MONGOURL, {
+        useNewUrlParser: true,
+        useCreateIndex: true
+    })
     .then(() => console.log("Mongodb conected !!!"))
     .catch(err => console.log(err));
 
@@ -23,15 +29,26 @@ mongoose
 app.use(passport.initialize());
 app.use(passport.session());
 
+// set global vars
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 // passport config
 require("./config/passport")(passport);
 
 // models
 const User = require("./models/Users");
+const Brand = require("./models/Brands");
 
 // routes
-app.use("/auth", auth);
+app.use("/api/user", auth);
+app.use("/api/brand", brand);
+app.use("/api/type", type);
+app.use("/api/product", product);
 
+// test router
 app.get("/test", (req, res) => {
     User.find({})
         .then(data => {

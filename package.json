@@ -14,13 +14,17 @@
     "author": "hoangdai",
     "license": "ISC",
     "dependencies": {
+        "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
         "concurrently": "^4.1.0",
         "dotenv": "^8.0.0",
         "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.6.0",
         "nodemon": "^1.19.1",
         "passport": "^0.4.0",
-        "passport-google-oauth20": "^2.0.0"
+        "passport-jwt": "^4.0.0",
+        "qs": "^6.7.0",
+        "react-loadable": "^5.5.0"
     }
 }
