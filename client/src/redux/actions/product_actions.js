@@ -4,7 +4,8 @@ import {
     GEL_ALL_PRODUCTS,
     GET_ERRORS,
     GET_FILLTER,
-    GET_PRODUCT_FILTER
+    GET_PRODUCT_FILTER,
+    ADD_PRODUCT
 } from "./types";
 
 export const setProductsLoading = () => {
@@ -57,4 +58,21 @@ export const getFilter = filters => {
         type: GET_FILLTER,
         payload: filters
     };
+};
+
+export const addProduct = data => dispatch => {
+    axios
+        .post("/api/product/create", data)
+        .then(res => {
+            dispatch({
+                type: ADD_PRODUCT,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err
+            });
+        });
 };

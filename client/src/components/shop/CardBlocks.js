@@ -7,6 +7,7 @@ import {
   getProductFilter
 } from "../../redux/actions/product_actions";
 import SpinnerIcon from "../common/SpinnerIcon";
+import NoResult from "../common/NoResult";
 
 class CardBlocks extends Component {
   componentDidMount() {
@@ -16,8 +17,7 @@ class CardBlocks extends Component {
 
   generateCardItem = products => {
     if (products.loading) return <SpinnerIcon />;
-    if (products.size === 0)
-      return <div className="no_result">Sorry, no results</div>;
+    if (products.size === 0) return <NoResult />;
     return products.products.map((item, i) => <CardItem item={item} key={i} />);
   };
 

@@ -76,6 +76,16 @@ const ManageBrand = Loadable({
   loading: SpinnerIcon
 });
 
+const Product = Loadable({
+  loader: () => import("./components/product/Product"),
+  loading: SpinnerIcon
+});
+
+const AddProduct = Loadable({
+  loader: () => import("./components/admin/AddProduct"),
+  loading: SpinnerIcon
+});
+
 class App extends Component {
   render() {
     return (
@@ -90,7 +100,9 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/shop" component={Shop} />
+            <Route exact path="/shop/:id" component={Product} />
             <Route exact path="/admin/brand" component={ManageBrand} />
+            <Route exact path="/admin/add-product" component={AddProduct} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const passport = require("passport");
+const cloudinary = require("cloudinary");
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,13 @@ const auth = require("./routes/user");
 const brand = require("./routes/brand");
 const type = require("./routes/type");
 const product = require("./routes/product");
+
+// cloudinary config
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+});
 
 // body parser middleaware
 app.use(bodyParser.urlencoded({ extended: true }));

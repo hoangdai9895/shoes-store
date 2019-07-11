@@ -5,7 +5,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-    brands: [],
+    list: [],
     loading: false,
     success: false
 };
@@ -16,11 +16,11 @@ export default function(state = initialState, action) {
             return {...state, loading: true };
         case GET_ALL_BRANDS:
             // console.log(action.payload);
-            return {...state, brands: action.payload, loading: false };
+            return {...state, list: action.payload, loading: false };
         case ADD_BRAND:
             return {
                 ...state,
-                brands: [action.payload.brand, ...state.brands],
+                list: [action.payload.brand, ...state.brands],
                 success: action.payload.success
             };
         default:

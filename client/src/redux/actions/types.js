@@ -14,3 +14,8 @@ export const GEL_ALL_PRODUCTS = "GEL_ALL_PRODUCTS";
 export const SET_PRODCUTs_LOADING = "SET_PRODCUTs_LOADING";
 export const GET_PRODUCT_FILTER = "GET_PRODUCT_FILTER";
 export const GET_FILLTER = "GET_FILLTER";
+export const ADD_PRODUCT = "ADD_PRODUCT";
+
+//type
+export const GET_ALL_TYPE = "GET_ALL_TYPE";
+export const SET_LOADING_TYPE = "SET_LOADING_TYPE";

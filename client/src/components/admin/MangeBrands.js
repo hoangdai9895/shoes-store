@@ -41,7 +41,9 @@ class MangeBrands extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   addNewBrand = e => {
@@ -65,10 +67,10 @@ class MangeBrands extends Component {
   generateBrands = brands =>
     brands.length > 0 ? (
       brands.map((item, i) => (
-        <ListGroupItem key={i}>{item.name}</ListGroupItem>
+        <ListGroupItem key={i}> {item.name} </ListGroupItem>
       ))
     ) : (
-      <p>You have no brand, create now !</p>
+      <p> You have no brand, create now! </p>
     );
 
   componentDidMount() {
@@ -84,9 +86,8 @@ class MangeBrands extends Component {
     // console.log(brands.brands.success);
     return (
       <Userlayout>
-        <h2 className="title">Manage Brands </h2>
-        <hr />
-        <p>You can edit brand name here !!!</p>
+        <h2 className="title"> Manage Brands </h2> <hr />
+        <p> You can edit brand name here!!! </p>
         <Button
           color="primary"
           onClick={this.toggle}
@@ -134,22 +135,18 @@ class MangeBrands extends Component {
               </Button>
             </FormGroup>
             {!brands.success && errors.errCreateBrand ? (
-              <Alert color="danger">{errors.errCreateBrand}</Alert>
+              <Alert color="danger"> {errors.errCreateBrand} </Alert>
             ) : null}
             {errorsInput.isEmpty !== "" ? (
-              <Alert color="danger">{errorsInput.isEmpty}</Alert>
+              <Alert color="danger"> {errorsInput.isEmpty} </Alert>
             ) : null}
-            {brands.success ? <Alert color="success">Success !!</Alert> : null}
+            {brands.success ? <Alert color="success"> Success!! </Alert> : null}
           </Form>
         </Collapse>
         <hr />
-        <p>Brands </p>
+        <p> Brands </p>
         <ListGroup className="list-brands">
-          {brands.loading ? (
-            <SpinnerIcon />
-          ) : (
-            this.generateBrands(brands.brands)
-          )}
+          {brands.loading ? <SpinnerIcon /> : this.generateBrands(brands.list)}
         </ListGroup>
       </Userlayout>
     );

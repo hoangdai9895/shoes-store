@@ -44,12 +44,12 @@ class CollapseBlock extends Component {
     return <img src="/img/down.png" alt="up" />;
   };
 
-  genarateBrands = brands => {
+  genarateField = filed => {
     let brandsList;
-    if (brands.loading) {
+    if (filed.loading) {
       brandsList = <SpinnerIcon />;
     } else {
-      brandsList = brands.brands.map((item, i) => (
+      brandsList = filed.list.map((item, i) => (
         <FormGroup check key={i} className="mb-3 brand-item">
           <Label check className="container-label">
             <Input
@@ -70,8 +70,8 @@ class CollapseBlock extends Component {
   };
 
   render() {
-    const { brands, type } = this.props;
-    // console.log(brands);
+    const { field, type } = this.props;
+    // console.log(this.state.checked);
     return (
       <>
         <ListGroupItem onClick={this.toggle}>
@@ -81,7 +81,7 @@ class CollapseBlock extends Component {
           <Card>
             <CardBody className="p-0">
               <FormGroup tag="fieldset" className="mb-0">
-                {this.genarateBrands(brands)}
+                {this.genarateField(field)}
               </FormGroup>
             </CardBody>
           </Card>
