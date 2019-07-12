@@ -40,7 +40,7 @@ router.post("/shop", (req, res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 100;
     let skip = parseInt(req.body.skip);
     let findArgs = {};
-    console.log(req.body.filters)
+    // console.log(req.body.filters)
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
             if (key === "price") {
@@ -116,5 +116,16 @@ router.post(
         );
     }
 );
+
+// get detail product
+router.post('/shop/:id', (req, res) => {
+    // console.log(req.body)
+    Product.find({ _id: req.body.id }).populate('brand').populate('type').then(product => {
+        // console.log(product)
+        res.status(200).json({ success: true, product: product[0] })
+    }).catch(err => {
+        res.json({ err: err })
+    })
+})
 
 module.exports = router;

@@ -24,7 +24,7 @@ export const getBrands = () => dispatch => {
         .catch(err => {
             dispatch({
                 type: GET_ERRORS,
-                payload: null
+                payload: err
             });
         });
 };

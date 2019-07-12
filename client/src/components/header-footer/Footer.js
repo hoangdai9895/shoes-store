@@ -8,8 +8,11 @@ const Footer = () => {
           <Col sm="4">
             <div className="footer">
               <ul>
-                <li>HỆ THỐNG CỬA HÀNG PHÂN PHỐI CHÍNH HÃNG CONVERSE - VANS</li>
-                <li> Hà Nội, Việt Nam </li>
+                <li>
+                  Grip meets comfort meets responsiveness. Pulseboost HD is out
+                  in the streets.
+                </li>
+                <li> Ha Noi, Việt Nam </li>
                 <li>
                   <a href="mail:hoangdai9895@gmail.com">
                     hoangdai9895 @gmail.com
@@ -30,7 +33,7 @@ const Footer = () => {
         </Row>
       </Container>
       <div className="text-center bg-dark p-3 text-light">
-        @2019 - Bản quyền thuộc về
+        @2019 - All rights reserved
         <span className="text-danger"> Shoes Store </span>
       </div>
     </Container>

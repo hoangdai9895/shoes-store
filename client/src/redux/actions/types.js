@@ -15,6 +15,7 @@ export const SET_PRODCUTs_LOADING = "SET_PRODCUTs_LOADING";
 export const GET_PRODUCT_FILTER = "GET_PRODUCT_FILTER";
 export const GET_FILLTER = "GET_FILLTER";
 export const ADD_PRODUCT = "ADD_PRODUCT";
+export const GET_DETAIL = 'GET_DETAIL'
 
 //type
 export const GET_ALL_TYPE = "GET_ALL_TYPE";

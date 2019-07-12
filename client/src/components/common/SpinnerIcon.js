@@ -4,7 +4,7 @@ import { Spinner } from "reactstrap";
 const SpinnerIcon = () => {
   return (
     <div className="spinner-icon__box">
-      <Spinner style={{ width: "6rem", height: "6rem" }} color="primary" />
+      <Spinner style={{ width: "6rem", height: "6rem" }} color="secondary" />
       {/* <Spinner type="grow" color="primary" />
       <Spinner type="grow" color="secondary" />
       <Spinner type="grow" color="success" />

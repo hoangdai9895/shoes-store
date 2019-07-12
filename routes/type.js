@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
     Type.find({})
         .then(type => res.json(type))
-        .catch(err => res.status(400));
+        .catch(err => res.status(400).json({ err: err }));
 });
 
 // create type

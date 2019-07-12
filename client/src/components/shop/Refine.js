@@ -47,7 +47,7 @@ class Refine extends Component {
       let priceValue = this.handlePriceFilter(filters);
       newFilters[category] = priceValue;
     }
-    console.log(newFilters);
+    // console.log(newFilters);
     // get all product filter
     this.props.getProductFilter(0, this.state.limit, newFilters);
     this.setState({

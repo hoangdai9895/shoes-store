@@ -24,7 +24,7 @@ router.post(
 router.get("/", (req, res) => {
     Brand.find({})
         .then(brands => res.json(brands))
-        .catch(err => res.status(404));
+        .catch(err => res.status(404).json({ err: err }));
 });
 
 module.exports = router;

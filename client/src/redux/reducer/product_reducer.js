@@ -2,11 +2,13 @@ import {
     GEL_ALL_PRODUCTS,
     SET_PRODCUTs_LOADING,
     GET_PRODUCT_FILTER,
-    ADD_PRODUCT
+    ADD_PRODUCT,
+    GET_DETAIL
 } from "../actions/types";
 
 const initialState = {
     products: [],
+    product: {},
     loading: false,
     success: false,
     size: null,
@@ -36,6 +38,8 @@ export default function(state = initialState, action) {
                 ...state,
                 addProduct: action.payload.success
             };
+        case GET_DETAIL:
+            return {...state, product: action.payload.product, loading: false, success: true }
         default:
             return state;
     }

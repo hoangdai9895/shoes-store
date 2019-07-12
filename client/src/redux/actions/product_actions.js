@@ -5,7 +5,8 @@ import {
     GET_ERRORS,
     GET_FILLTER,
     GET_PRODUCT_FILTER,
-    ADD_PRODUCT
+    ADD_PRODUCT,
+    GET_DETAIL
 } from "./types";
 
 export const setProductsLoading = () => {
@@ -76,3 +77,21 @@ export const addProduct = data => dispatch => {
             });
         });
 };
+
+export const getProductDetail = (id) => dispatch => {
+    dispatch(setProductsLoading());
+    const data = {
+        id: id
+    }
+    axios.post(`/api/product/shop/${id}`, data).then(res => {
+        dispatch({
+            type: GET_DETAIL,
+            payload: res.data
+        })
+    }).catch(err => {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err
+        })
+    })
+}
