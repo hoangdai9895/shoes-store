@@ -6,7 +6,8 @@ import {
     GET_FILLTER,
     GET_PRODUCT_FILTER,
     ADD_PRODUCT,
-    GET_DETAIL
+    GET_DETAIL,
+    GET_CART_QUANTITY
 } from "./types";
 
 export const setProductsLoading = () => {
@@ -95,3 +96,9 @@ export const getProductDetail = (id) => dispatch => {
         })
     })
 }
+
+// get cart quantity
+export const getCartQuantity = (quantity) => ({
+    type: GET_CART_QUANTITY,
+    payload: quantity
+})

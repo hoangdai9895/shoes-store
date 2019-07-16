@@ -20,3 +20,6 @@ export const GET_DETAIL = 'GET_DETAIL'
 //type
 export const GET_ALL_TYPE = "GET_ALL_TYPE";
 export const SET_LOADING_TYPE = "SET_LOADING_TYPE";
+
+// cart
+export const GET_CART_QUANTITY = "GET_CART_QUANTITY"

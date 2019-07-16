@@ -15,12 +15,14 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/actions/auth_actions";
+import { getCartQuantity } from "../../redux/actions/product_actions";
 import { Link } from "react-router-dom";
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      cart: []
     };
   }
 
@@ -30,12 +32,21 @@ class Header extends Component {
     });
   };
 
+  componentDidMount() {
+    let cart =
+      window.localStorage.getItem("cart") !== null
+        ? JSON.parse(window.localStorage.getItem("cart"))
+        : [];
+    this.props.getCartQuantity(cart.length);
+  }
+
   logOut = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
 
   render() {
+    const { auth, cart } = this.props;
     return (
       <Container className="bg-light sticky-top header" fluid>
         <Container className="bg-light">
@@ -62,6 +73,19 @@ class Header extends Component {
                         Shop
                       </Link>
                     </NavItem>
+                    <NavItem className="position-relative">
+                      <Link to="/public/cart" className="nav-link">
+                        <img
+                          src="https://img.icons8.com/ios/24/000000/shopping-cart.png"
+                          alt="cart"
+                        />
+                        {cart.quantity > 0 ? (
+                          <span className="bg-danger position-absolute quantity-cart-header">
+                            {cart.quantity}
+                          </span>
+                        ) : null}
+                      </Link>
+                    </NavItem>
                     {!this.props.auth.isAuthenticated ? (
                       <>
                         <NavItem>
@@ -83,15 +107,15 @@ class Header extends Component {
                             alt="user icon"
                             className="user-icon"
                           />
-                          hoang dai <span>(1)</span>
+                          {auth.user.name}
                         </DropdownToggle>
                         <DropdownMenu right>
                           <Link to="/user/dashboard" className="dropdown-item">
                             My Account
                           </Link>
-                          <Link to="/user/cart" className="dropdown-item">
+                          {/* <Link to="/user/cart" className="dropdown-item">
                             My Cart
-                          </Link>
+                          </Link> */}
                           <DropdownItem divider />
                           <DropdownItem onClick={e => this.logOut(e)}>
                             Logout
@@ -110,9 +134,10 @@ class Header extends Component {
   }
 }
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  cart: state.cart
 });
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, getCartQuantity }
 )(Header);

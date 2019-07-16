@@ -51,6 +51,16 @@ const Mycart = Loadable({
   loading: SpinnerIcon
 });
 
+const PublicCart = Loadable({
+  loader: () => import("./components/common/PublicCart.js"),
+  loading: SpinnerIcon
+});
+
+const CheckOut = Loadable({
+  loader: () => import("./components/cart/Checkout"),
+  loading: SpinnerIcon
+});
+
 const Login = Loadable({
   loader: () => import("./components/login-register/Login"),
   loading: SpinnerIcon
@@ -98,6 +108,8 @@ class App extends Component {
             <Route exact path="/user/info" component={UserInfo} />
             <Route exact path="/user/cart" component={Mycart} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/public/cart" component={PublicCart} />
+            <Route exact path="/checkout" component={CheckOut} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/shop" component={Shop} />
             <Route exact path="/shop/:id" component={Product} />

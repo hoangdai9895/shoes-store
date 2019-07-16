@@ -1,21 +1,22 @@
 import React from "react";
 import { Spinner } from "reactstrap";
 
-const SpinnerIcon = () => {
+const renderSpiner = type => {
+  if (type === "grow")
+    return (
+      <>
+        <Spinner type="grow" color="secondary" size="sm" />
+      </>
+    );
   return (
     <div className="spinner-icon__box">
-      <Spinner style={{ width: "6rem", height: "6rem" }} color="secondary" />
-      {/* <Spinner type="grow" color="primary" />
-      <Spinner type="grow" color="secondary" />
-      <Spinner type="grow" color="success" />
-      <Spinner type="grow" color="danger" />
-      <Spinner type="grow" color="warning" />
-      <Spinner type="grow" color="info" />
-      <Spinner type="grow" color="light" />
-      <Spinner type="grow" color="dark" /> */}
-      {/* <img src="/img/spinner.gif" alt="" /> */}
+      <Spinner style={{ width: "4rem", height: "4rem" }} color="secondary" />
     </div>
   );
+};
+
+const SpinnerIcon = props => {
+  return renderSpiner(props.type);
 };
 
 export default SpinnerIcon;
