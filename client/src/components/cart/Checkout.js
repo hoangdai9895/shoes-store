@@ -10,6 +10,8 @@ import {
   Table
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { createOrder } from "../../redux/actions/order_actions";
 class Checkout extends Component {
   state = { cart: [] };
 
@@ -52,22 +54,50 @@ class Checkout extends Component {
     return total;
   };
 
+  onSubmit = () => {
+    const order = {
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone,
+      address: this.state.address,
+      items: this.state.cart
+    };
+    this.props.createOrder(order);
+    this.props.history.push("/order-success");
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
     const { cart } = this.state;
-    // console.log(cart);
+    // console.log(this.state);
     return (
       <Container className="mt-5">
         <Row>
           <Col sm="6">
             <h3 className="title">Your Information</h3>
             <hr />
-            <Form>
+            <Form onSubmit={() => this.onSubmit()}>
               <FormGroup>
-                <Input type="email" name="email" placeholder="Email" required />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                  onChange={e => this.onChange(e)}
+                />
               </FormGroup>
 
               <FormGroup>
-                <Input type="text" name="name" placeholder="Name" required />
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  required
+                  onChange={e => this.onChange(e)}
+                />
               </FormGroup>
 
               <FormGroup>
@@ -76,6 +106,7 @@ class Checkout extends Component {
                   name="phone"
                   placeholder="Phone"
                   required
+                  onChange={e => this.onChange(e)}
                 />
               </FormGroup>
 
@@ -85,6 +116,7 @@ class Checkout extends Component {
                   name="address"
                   placeholder="Address"
                   required
+                  onChange={e => this.onChange(e)}
                 />
               </FormGroup>
               <div className="d-flex justify-content-between align-items-center">
@@ -113,4 +145,9 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+const mapStateToProps = state => ({});
+
+export default connect(
+  mapStateToProps,
+  { createOrder }
+)(Checkout);

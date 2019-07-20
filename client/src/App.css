@@ -777,3 +777,7 @@ h1.product__title {
 .total {
     padding: 12px;
 }
+
+.table thead th {
+    border-bottom: none!important;
+}

@@ -12,6 +12,7 @@ const auth = require("./routes/user");
 const brand = require("./routes/brand");
 const type = require("./routes/type");
 const product = require("./routes/product");
+const order = require('./routes/order')
 
 // cloudinary config
 cloudinary.config({
@@ -55,6 +56,7 @@ app.use("/api/user", auth);
 app.use("/api/brand", brand);
 app.use("/api/type", type);
 app.use("/api/product", product);
+app.use('/api/order', order)
 
 // test router
 app.get("/test", (req, res) => {

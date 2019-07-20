@@ -23,3 +23,13 @@ export const SET_LOADING_TYPE = "SET_LOADING_TYPE";
 
 // cart
 export const GET_CART_QUANTITY = "GET_CART_QUANTITY"
+
+
+//order
+export const CREATE_ORDER = "CREATE_ORDER"
+export const SET_ORDER_LOADING = "SET_ORDER_LOADING"
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
+export const GET_ORDERS_BY_ID = "GET_ORDERS_BY_ID"
+export const FINISH_ORDER = 'FINISH_ORDER'
+export const FINISH_ORDER_DETAIL = "FINISH_ORDER_DETAIL"
+export const DELETE_ORDER = "DELETE_ORDER"

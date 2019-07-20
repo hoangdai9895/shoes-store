@@ -96,6 +96,20 @@ const AddProduct = Loadable({
   loading: SpinnerIcon
 });
 
+const OrderSuccess = Loadable({
+  loader: () => import("./components/common/CheckoutSucess"),
+  loading: SpinnerIcon
+});
+
+const Order = Loadable({
+  loader: () => import("./components/admin/Order.js"),
+  loading: SpinnerIcon
+});
+const OrderDetail = Loadable({
+  loader: () => import("./components/admin/OrderDetail"),
+  loading: SpinnerIcon
+});
+
 class App extends Component {
   render() {
     return (
@@ -115,6 +129,9 @@ class App extends Component {
             <Route exact path="/shop/:id" component={Product} />
             <Route exact path="/admin/brand" component={ManageBrand} />
             <Route exact path="/admin/add-product" component={AddProduct} />
+            <Route exact path="/admin/orders" component={Order} />
+            <Route exact path="/order-success" component={OrderSuccess} />
+            <Route exact path="/admin/orders/:id" component={OrderDetail} />
             <Route component={NotFound} />
           </Switch>
           <Footer />
