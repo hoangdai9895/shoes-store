@@ -6,6 +6,7 @@ import product_reducer from "./product_reducer";
 import type_reducer from "./type_reducer";
 import cart_reducer from "./cart_reducer";
 import order_reducer from "./order_reducer";
+import user_reducer from "./user_reducer";
 
 export default combineReducers({
     auth: auth_reducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     products: product_reducer,
     type: type_reducer,
     cart: cart_reducer,
-    order: order_reducer
+    order: order_reducer,
+    user: user_reducer
 });

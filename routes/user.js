@@ -62,4 +62,61 @@ router.post("/login", (req, res) => {
     });
 });
 
+// get user information
+router.post(
+    "/",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        User.findById({ _id: req.body.id })
+            .then(user => res.status(200).json({ success: true, user }))
+            .catch(err => res.status(404).json(err));
+    }
+);
+
+// update name
+router.post(
+    "/name",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        User.findByIdAndUpdate(req.body.id, { name: req.body.name })
+            .then(user => res.status(200).json({ user }))
+            .catch(err => res.status(404).json(err));
+    }
+);
+
+//update password
+router.post(
+    "/password",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        const id = req.body.id;
+        let newpassword = req.body.newpassword;
+        const currentpassword = req.body.currentpassword;
+        // console.log(id, currentpassword);
+        User.findById(id)
+            .then(user => {
+                // console.log(user);
+                bcrypt
+                    .compare(currentpassword, user.password)
+                    .then(match => {
+                        if (!match) {
+                            res.status(400).json({ errNewPassword: "Password incorrect" });
+                        } else {
+                            bcrypt.genSalt(10, (err, salt) => {
+                                bcrypt.hash(newpassword, salt, (err, hash) => {
+                                    if (err) throw err;
+                                    newpassword = hash;
+                                    User.findByIdAndUpdate(id, { password: newpassword })
+                                        .then(user => res.json({ success: true, user }))
+                                        .catch(err => res.status(404).json(err));
+                                });
+                            });
+                        }
+                    })
+                    .catch(err => res.status(404).json(err));
+            })
+            .catch(err => res.status(404).json(err));
+    }
+);
+
 module.exports = router;

@@ -91,6 +91,11 @@ const Product = Loadable({
   loading: SpinnerIcon
 });
 
+const ManageProduct = Loadable({
+  loader: () => import("./components/admin/ManageProduct"),
+  loading: SpinnerIcon
+});
+
 const AddProduct = Loadable({
   loader: () => import("./components/admin/AddProduct"),
   loading: SpinnerIcon
@@ -105,8 +110,14 @@ const Order = Loadable({
   loader: () => import("./components/admin/Order.js"),
   loading: SpinnerIcon
 });
+
 const OrderDetail = Loadable({
   loader: () => import("./components/admin/OrderDetail"),
+  loading: SpinnerIcon
+});
+
+const UserPassword = Loadable({
+  loader: () => import("./components/user/UserPassword"),
   loading: SpinnerIcon
 });
 
@@ -121,6 +132,8 @@ class App extends Component {
             <Route exact path="/user/dashboard" component={UserDashboard} />
             <Route exact path="/user/info" component={UserInfo} />
             <Route exact path="/user/cart" component={Mycart} />
+            <Route exact path="/user/information" component={UserInfo} />
+            <Route exact path="/user/password" component={UserPassword} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/public/cart" component={PublicCart} />
             <Route exact path="/checkout" component={CheckOut} />
@@ -130,8 +143,13 @@ class App extends Component {
             <Route exact path="/admin/brand" component={ManageBrand} />
             <Route exact path="/admin/add-product" component={AddProduct} />
             <Route exact path="/admin/orders" component={Order} />
-            <Route exact path="/order-success" component={OrderSuccess} />
+            <Route
+              exact
+              path="/admin/manage-product"
+              component={ManageProduct}
+            />
             <Route exact path="/admin/orders/:id" component={OrderDetail} />
+            <Route exact path="/order-success" component={OrderSuccess} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

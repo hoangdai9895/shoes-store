@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getOrderById, finishOrder } from "../../redux/actions/order_actions";
 import SpinnerIcon from "../common/SpinnerIcon";
+
 class OrderDetail extends Component {
   state = {
     modal: false

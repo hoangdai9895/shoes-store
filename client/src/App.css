@@ -781,3 +781,12 @@ h1.product__title {
 .table thead th {
     border-bottom: none!important;
 }
+
+.img-list-product {
+    width: 110px;
+}
+
+.img-list-product img {
+    width: 100%;
+    height: auto;
+}

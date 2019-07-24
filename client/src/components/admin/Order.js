@@ -9,9 +9,22 @@ import {
   deleteOrder
 } from "../../redux/actions/order_actions";
 import SpinnerIcon from "../common/SpinnerIcon";
+import Moment from "react-moment";
 class Order extends Component {
+  state = {};
   componentDidMount() {
+    if (!this.props.auth.isAdmin) {
+      this.props.history.push("/shop");
+    }
     this.props.getOrders();
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    // console.log(props.auth.isAdmin);
+    if (!props.auth.isAdmin) {
+      props.history.push("/shop");
+    }
+    return state;
   }
 
   generateListOrderItem = (list, loading) => {
@@ -26,7 +39,9 @@ class Order extends Component {
     return list.map((e, i) => (
       <tr key={i} style={{ background: e.isFinished ? "#f1f1f1" : "" }}>
         <th>{i + 1}</th>
-        <td>{e.date}</td>
+        <td>
+          <Moment format="YYYY-MM-DD">{e.date}</Moment>
+        </td>
         <td>{e.name}</td>
         <td>$ {this.subTotal(e.items)}</td>
         <td>{e.isFinished ? "Complete" : "Pending"}</td>
@@ -92,7 +107,8 @@ class Order extends Component {
 }
 
 const mapStateToProps = state => ({
-  order: state.order
+  order: state.order,
+  auth: state.auth
 });
 
 export default connect(

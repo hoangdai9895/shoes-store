@@ -8,6 +8,14 @@ const renderSpiner = type => {
         <Spinner type="grow" color="secondary" size="sm" />
       </>
     );
+  if (type === "3grow")
+    return (
+      <>
+        <Spinner type="grow" color="light" size="sm" />
+        <Spinner type="grow" color="secondary" size="sm" />
+        <Spinner type="grow" color="dark" size="sm" />
+      </>
+    );
   return (
     <div className="spinner-icon__box">
       <Spinner style={{ width: "4rem", height: "4rem" }} color="secondary" />

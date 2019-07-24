@@ -13,7 +13,6 @@ router.post(
     passport.authenticate("jwt", { session: false }),
     admin,
     (req, res) => {
-        // console.log(req.body);
         const product = new Product(req.body);
         product
             .save()
@@ -25,9 +24,7 @@ router.post(
 // get all product
 
 router.get("/", (req, res) => {
-    Product.find({
-            brand: ["5d1dd0add97f461578be41f0", "5d1dd0add97f461578be41f0"]
-        })
+    Product.find({})
         .populate("brand")
         .then(products => res.status(200).json({ success: true, products }))
         .catch(err => res.status(400).json(err));
@@ -40,11 +37,9 @@ router.post("/shop", (req, res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 100;
     let skip = parseInt(req.body.skip);
     let findArgs = {};
-    // console.log(req.body.filters)
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
             if (key === "price") {
-                // console.log(req.body.filters[key][0])
                 findArgs[key] = {
                     $gte: req.body.filters[key][0],
                     $lte: req.body.filters[key][1]
@@ -53,8 +48,6 @@ router.post("/shop", (req, res) => {
             } else findArgs[key] = req.body.filters[key];
         }
     }
-    // console.log(req.body.filters);
-    // console.log(findArgs);
     Product.find(findArgs)
         .populate("brand")
         .populate("wood")

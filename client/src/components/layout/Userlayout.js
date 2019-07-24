@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 const links = [
   {
-    name: "My Acount",
+    name: "My Account",
     link: "/user/dashboard"
   }
   // {
@@ -19,9 +19,13 @@ const adminLink = [
     name: "Oders",
     link: "/admin/orders"
   },
+  // {
+  //   name: "Site info",
+  //   link: "/admin/site-info"
+  // },
   {
-    name: "Site info",
-    link: "/admin/site-info"
+    name: "Manage product",
+    link: "/admin/manage-product"
   },
   {
     name: "Add product",
@@ -39,8 +43,9 @@ const Userlayout = props => {
     links.map((item, i) => (
       <ListGroupItem key={i} action>
         <Link to={item.link} className="text-dark">
-          {item.name}
-        </Link>
+          {" "}
+          {item.name}{" "}
+        </Link>{" "}
       </ListGroupItem>
     ));
 
@@ -48,19 +53,18 @@ const Userlayout = props => {
     <Container className="my-5">
       <Row>
         <Col sm="3">
-          <h2 className="title"> My Account </h2>
-          <ListGroup className="mb-4"> {generateLinks(links)} </ListGroup>
-          <p className="lead">Admin panel will go here </p>
-          <hr />
+          <h2 className="title"> My Account </h2>{" "}
+          <ListGroup className="mb-4"> {generateLinks(links)} </ListGroup>{" "}
+          <p className="lead"> Admin panel will go here </p> <hr />{" "}
           {props.auth.isAdmin ? (
             <>
-              <h2 className="title"> Admin </h2>
-              <ListGroup> {generateLinks(adminLink)} </ListGroup>
+              <h2 className="title"> Admin </h2>{" "}
+              <ListGroup> {generateLinks(adminLink)} </ListGroup>{" "}
             </>
-          ) : null}
-        </Col>
-        <Col sm="9"> {props.children} </Col>
-      </Row>
+          ) : null}{" "}
+        </Col>{" "}
+        <Col sm="9"> {props.children} </Col>{" "}
+      </Row>{" "}
     </Container>
   );
 };

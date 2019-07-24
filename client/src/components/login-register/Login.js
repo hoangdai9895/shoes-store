@@ -12,15 +12,12 @@ class Login extends Component {
   };
 
   login = () => {
-    // console.log(this.state);
-    // console.log(this.props.errors);
     if (this.state.email === "" || this.state.email === "") {
       this.setState({
         errorsForm: { isRequired: "Email and Password is not empty" }
       });
       return;
     }
-    // if(this.props.auth.err)
     const user = {
       email: this.state.email,
       password: this.state.password
