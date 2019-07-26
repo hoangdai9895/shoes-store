@@ -76,9 +76,10 @@ router.post(
         cloudinary.uploader.upload(
             req.files.file.path,
             result => {
+                console.log(result)
                 res.status(200).send({
                     public_id: result.public_id,
-                    url: result.url
+                    url: result.secure_url
                 });
             }, {
                 folder: "shoes",
@@ -94,7 +95,9 @@ router.post(
     passport.authenticate("jwt", { session: false }),
     admin,
     (req, res) => {
+        // let image_id = req.query.public_id;
         let image_id = req.body.id;
+        // console.log(req.body.id);
         cloudinary.uploader.destroy(
             image_id,
             err => {
@@ -148,7 +151,7 @@ router.post('/update', passport.authenticate('jwt', { session: false }), admin, 
         price: req.body.price,
         images: req.body.images
     }, { new: true }).then(product => {
-        // console.log(product)
+        console.log(product)
         res.status(200).json({ success: true, product })
     }).catch(err => res.status(400).json(err))
 })
