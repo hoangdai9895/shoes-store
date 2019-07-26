@@ -38,10 +38,10 @@ npm run dev #for deverlopment
 
 ## Built With
 
-NodeJs (ExpressJs)
-ReactJs + Redux + Redux thunk
-MongoDb (mongoose, cloud mongodb)
-Bootstrap
+- NodeJs (ExpressJs)
+- ReactJs + Redux + Redux thunk
+- MongoDb (mongoose, cloud mongodb)
+- Bootstrap
 
 ## Authors
 
