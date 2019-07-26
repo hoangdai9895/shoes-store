@@ -1,10 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllProdcuct } from "../../redux/actions/product_actions";
+import {
+  getAllProdcuct,
+  deleteProduct
+} from "../../redux/actions/product_actions";
 import { Table } from "reactstrap";
 import { Link } from "react-router-dom";
 import SpinnerIcon from "../common/SpinnerIcon";
 class ProductList extends Component {
+  deleteProduct = product => {
+    if (window.confirm("Are you sure ???")) {
+      let listImages = [];
+      for (let key in product.images) {
+        listImages.push(product.images[key].public_id);
+      }
+      this.props.deleteProduct(product._id, listImages);
+    }
+  };
+
   generateProductList = (products, loading) => {
     if (loading)
       return (
@@ -14,12 +27,16 @@ class ProductList extends Component {
           </td>
         </tr>
       );
+
     return products.map((item, i) => (
       <tr key={i}>
         <th>{i++}</th>
         <td>
           <div className="img-list-product">
-            <img src={item.images[0].url} alt="" />
+            <img
+              src={item.images[0] ? item.images[0].url : "/img/nophoto.png"}
+              alt=""
+            />
           </div>
         </td>
         <td>
@@ -30,10 +47,18 @@ class ProductList extends Component {
         <td>$ {item.price}</td>
         <td>
           <div className="d-flex">
-            <Link to="/admin/update-product" className="btn btn-primary mr-2">
+            <Link
+              to={`/admin/update-product/${item._id}`}
+              className="btn btn-primary mr-2"
+            >
               Update
             </Link>
-            <button className="btn btn-danger">Remove</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => this.deleteProduct(item)}
+            >
+              Remove
+            </button>
           </div>
         </td>
       </tr>
@@ -46,9 +71,20 @@ class ProductList extends Component {
 
   render() {
     const { products } = this.props;
+    // console.log(products);
     return (
       <div>
-        <div className="mb-3"> 63 Products </div>
+        <div className="mb-3">
+          {products.loading ? (
+            <span>
+              <SpinnerIcon type="3grow" />
+            </span>
+          ) : products.size > 0 ? (
+            `${products.size} Products`
+          ) : (
+            `${products.size} Product`
+          )}
+        </div>
         <Table>
           <thead>
             <tr>
@@ -74,5 +110,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllProdcuct }
+  { getAllProdcuct, deleteProduct }
 )(ProductList);

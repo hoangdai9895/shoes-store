@@ -125,9 +125,11 @@ class PublicCart extends Component {
           <Link to="/shop" className="btn btn-secondary">
             Continue Shopping
           </Link>
-          <Link to="/checkout" className="btn btn-dark">
-            Check out
-          </Link>
+          {cart.length === 0 ? null : (
+            <Link to="/checkout" className="btn btn-dark">
+              Check out
+            </Link>
+          )}
         </div>
       </Container>
     );

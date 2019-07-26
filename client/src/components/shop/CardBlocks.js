@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row } from "reactstrap";
+import { Row, Container } from "reactstrap";
 import CardItem from "../common/CardItem";
 import { connect } from "react-redux";
 import {
@@ -10,9 +10,13 @@ import SpinnerIcon from "../common/SpinnerIcon";
 import NoResult from "../common/NoResult";
 
 class CardBlocks extends Component {
+  state = {
+    limit: 6,
+    skip: 0
+  };
   componentDidMount() {
     // this.props.getAllProdcuct();
-    this.props.getProductFilter(0, 6, {});
+    this.props.getProductFilter(this.state.skip, this.state.limit, {});
   }
 
   generateCardItem = products => {
@@ -21,11 +25,28 @@ class CardBlocks extends Component {
     return products.products.map((item, i) => <CardItem item={item} key={i} />);
   };
 
+  loadmoreCardItem = () => {
+    let skip = this.state.skip + this.state.limit;
+    this.props.getProductFilter(skip, this.state.limit, {});
+    this.setState({ skip });
+  };
+
   render() {
     const { products } = this.props;
     return (
       <div>
         <Row>{this.generateCardItem(products)}</Row>
+
+        {products.size > 0 && products.size >= this.state.limit ? (
+          <Container style={{ textAlign: "center" }}>
+            <button
+              className="btn btn-outline-secondary mx-auto"
+              onClick={() => this.loadmoreCardItem()}
+            >
+              LOAD MORE
+            </button>
+          </Container>
+        ) : null}
       </div>
     );
   }

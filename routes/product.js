@@ -26,7 +26,7 @@ router.post(
 router.get("/", (req, res) => {
     Product.find({})
         .populate("brand")
-        .then(products => res.status(200).json({ success: true, products }))
+        .then(products => res.status(200).json({ success: true, products, size: products.length }))
         .catch(err => res.status(400).json(err));
 });
 
@@ -76,7 +76,6 @@ router.post(
         cloudinary.uploader.upload(
             req.files.file.path,
             result => {
-                // console.log(result);
                 res.status(200).send({
                     public_id: result.public_id,
                     url: result.url
@@ -95,9 +94,7 @@ router.post(
     passport.authenticate("jwt", { session: false }),
     admin,
     (req, res) => {
-        // let image_id = req.query.public_id;
         let image_id = req.body.id;
-        // console.log(req.body.id);
         cloudinary.uploader.destroy(
             image_id,
             err => {
@@ -112,13 +109,48 @@ router.post(
 
 // get detail product
 router.post('/shop/:id', (req, res) => {
-    // console.log(req.body)
     Product.find({ _id: req.body.id }).populate('brand').populate('type').then(product => {
-        // console.log(product)
         res.status(200).json({ success: true, product: product[0] })
     }).catch(err => {
-        res.json({ err: err })
+        res.status(404).json({ errProductDetail: 'no product found ' })
     })
+})
+
+//delete product
+router.post('/delete', passport.authenticate('jwt', { session: false }), admin, (req, res) => {
+    // console.log(req.body.listImages.length === 0)
+    if (req.body.listImages.length !== 0) {
+        cloudinary.v2.api.delete_resources(req.body.listImages).then(results => {
+            Product.findByIdAndRemove(req.body.id).then(product => {
+                res.status(200).json({ success: true, product, results })
+            }).catch(err => {
+                res.status(404).json(err)
+            })
+        }).catch(err => res.status(400).json(err))
+    } else {
+        Product.findByIdAndRemove(req.body.id).then(product => {
+            res.status(200).json({ success: true, product })
+        }).catch(err => {
+            res.status(404).json(err)
+        })
+    }
+
+})
+
+
+// update product
+router.post('/update', passport.authenticate('jwt', { session: false }), admin, (req, res) => {
+    Product.findByIdAndUpdate(req.body.id, {
+        name: req.body.name,
+        description: req.body.description,
+        brand: req.body.brand,
+        type: req.body.type,
+        price: req.body.price,
+        images: req.body.images
+    }, { new: true }).then(product => {
+        // console.log(product)
+        res.status(200).json({ success: true, product })
+    }).catch(err => res.status(400).json(err))
 })
 
 module.exports = router;

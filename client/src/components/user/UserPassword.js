@@ -4,7 +4,7 @@ import Userlayout from "../layout/Userlayout";
 import { Form, FormGroup, Input, Label, Alert } from "reactstrap";
 // import SpinnerIcon from "../common/SpinnerIcon.js";
 import { updateInfo } from "../../redux/actions/user_actions";
-
+import { Link } from "react-router-dom";
 class UserPassword extends Component {
   state = {
     currentpassword: "",
@@ -53,7 +53,7 @@ class UserPassword extends Component {
           toggle={this.onDismiss}
           className="mt-3"
         >
-          Pass word does not match!!
+          Password does not match!!
         </Alert>
       );
 
@@ -137,8 +137,10 @@ class UserPassword extends Component {
               required
             />
             {this.generateNotification()}
-
             <button className="btn btn-block btn-primary mt-3">Submit</button>
+            <Link to="/user/dashboard" className="btn btn-block btn-info">
+              Go back to User page
+            </Link>
           </FormGroup>
         </Form>
       </Userlayout>

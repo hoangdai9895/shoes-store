@@ -1,23 +1,27 @@
 import React, { Component } from "react";
-import Userlayout from "../layout/Userlayout";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Button, Form, FormGroup, Input, Alert, Label } from "reactstrap";
+import Userlayout from "../layout/Userlayout";
+import { Button, Form, FormGroup, Input, Label, Alert } from "reactstrap";
+import SpinnerIcon from "../common/SpinnerIcon";
+import FileUpdate from "../common/FileUpdate";
 import { getAllType } from "../../redux/actions/type_actions";
 import { getBrands } from "../../redux/actions/brands_actions";
-import { addProduct } from "../../redux/actions/product_actions";
-import SpinnerIcon from "../common/SpinnerIcon";
-import FileUpload from "../common/FileUpload";
-import { Link } from "react-router-dom";
-class AddProduct extends Component {
+import {
+  getProductDetail,
+  updateProduct
+} from "../../redux/actions/product_actions";
+class UpdateProduct extends Component {
   state = {
     formErr: {},
-    name: "",
-    description: "",
-    price: "",
-    brand: "",
-    type: "",
+    name: null,
+    description: null,
+    price: null,
+    brand: null,
+    type: null,
     images: [],
-    addSuccess: false
+    updateSuccess: false,
+    loadProduct: false
   };
 
   generateOption = (data, loading, type) => {
@@ -34,36 +38,28 @@ class AddProduct extends Component {
     );
   };
 
+  imagesHandler = images => {
+    this.setState({ images });
+  };
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
-    const { name, description, brand, type, price, images } = this.state;
-    const newProduct = {
-      name: name,
-      description: description,
-      brand: brand,
-      type: type,
-      price: price,
-      images: images
+    const data = {
+      id: this.props.match.params.id,
+      name: this.state.name,
+      description: this.state.description,
+      brand: this.state.brand,
+      type: this.state.type,
+      price: this.state.price,
+      images: this.state.images
     };
-    this.props.addProduct(newProduct);
-    this.setState({
-      name: "",
-      description: "",
-      price: "",
-      addSuccess: true,
-      images: [],
-      type: "",
-      brand: ""
-    });
-  };
 
-  imagesHandler = images => {
-    // console.log(images);
-    this.setState({ images: images });
+    this.props.updateProduct(data);
+    this.setState({ updateSuccess: true });
   };
 
   componentDidMount() {
@@ -72,20 +68,47 @@ class AddProduct extends Component {
     } else {
       this.props.getAllType();
       this.props.getBrands();
+      this.props.getProductDetail(this.props.match.params.id);
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    // console.log(state.updateSuccess);
+    if (!state.loadProduct) {
+      return (state = {
+        loadProduct: props.products.success,
+        name: props.products.product.name,
+        description: props.products.product.description,
+        price: props.products.product.price,
+        brand: props.products.product.brand,
+        type: props.products.product.type,
+        images: props.products.product.images
+      });
+    }
+    return null;
+  }
+
   render() {
+    const { brands, type, products, errors } = this.props;
+    const { updateSuccess } = this.state;
     // console.log(this.state);
-    const { brands, type, products } = this.props;
-    const { addSuccess } = this.state;
+    if (Object.keys(errors).length !== 0)
+      return (
+        <Userlayout>
+          <img src="/img/no_results.png" alt="" className="w-100" />
+        </Userlayout>
+      );
+
     return (
       <Userlayout>
-        <h2 className="title"> Add Product </h2> <hr />
+        <h2 className="title"> Update Product </h2> <hr />
         <Form onSubmit={e => this.onSubmit(e)}>
-          <FileUpload
+          <FileUpdate
             imagesHandler={e => this.imagesHandler(e)}
-            reset={this.state.addSuccess}
+            // reset={this.state.updateSuccess}
+            success={products.success}
+            images={products.product.images}
+            // id={this.props.match.params.id}
           />
           <hr />
           <FormGroup>
@@ -97,7 +120,8 @@ class AddProduct extends Component {
               placeholder="Product name"
               onChange={e => this.onChange(e)}
               required
-              value={this.state.name}
+              value={this.state.name ? this.state.name : ""}
+              // defaultValue={this.state.name}
             />
           </FormGroup>
 
@@ -110,7 +134,7 @@ class AddProduct extends Component {
               placeholder="Product description"
               onChange={e => this.onChange(e)}
               required
-              value={this.state.description}
+              value={this.state.description ? this.state.description : ""}
             />
           </FormGroup>
 
@@ -123,7 +147,7 @@ class AddProduct extends Component {
               placeholder="Product price"
               onChange={e => this.onChange(e)}
               required
-              value={this.state.price}
+              value={this.state.price ? this.state.price : ""}
             />
           </FormGroup>
 
@@ -143,23 +167,21 @@ class AddProduct extends Component {
             className="btn-block"
             // onClick={e => this.onSubmit(e)}
           >
-            Add Product
+            Update Product
           </Button>
-          <Link
-            to="/admin/manage-product"
-            className="btn btn-block mt-3 btn-info"
-          >
-            Go back admin page
-          </Link>
         </Form>
         <hr />
-        {products.addProduct && addSuccess ? (
+        {products.updateSuccess && updateSuccess ? (
           <Alert color="success">Add Product success</Alert>
         ) : null}
+        <Link to="/admin/manage-product" className="btn btn-block btn-info">
+          Go back to products page
+        </Link>
       </Userlayout>
     );
   }
 }
+
 const mapStateToProps = state => ({
   type: state.type,
   brands: state.brands,
@@ -167,11 +189,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
   products: state.products
 });
+
 export default connect(
   mapStateToProps,
-  {
-    getAllType,
-    getBrands,
-    addProduct
-  }
-)(AddProduct);
+  { getAllType, getBrands, getProductDetail, updateProduct }
+)(UpdateProduct);

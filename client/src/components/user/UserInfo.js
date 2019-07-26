@@ -4,6 +4,7 @@ import { Form, FormGroup, Input, Button, Label, Alert } from "reactstrap";
 import { connect } from "react-redux";
 import { getUser, updateInfo } from "../../redux/actions/user_actions";
 import SpinnerIcon from "../common/SpinnerIcon.js";
+import { Link } from "react-router-dom";
 class UserInfo extends Component {
   state = {
     name: "",
@@ -67,6 +68,9 @@ class UserInfo extends Component {
             </FormGroup>
           )}
         </Form>
+        <Link to="/user/dashboard" className="btn btn-info">
+          Go back to User page
+        </Link>
         <Alert
           color="success"
           isOpen={this.state.visible}

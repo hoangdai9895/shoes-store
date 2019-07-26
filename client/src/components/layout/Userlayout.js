@@ -27,10 +27,10 @@ const adminLink = [
     name: "Manage product",
     link: "/admin/manage-product"
   },
-  {
-    name: "Add product",
-    link: "/admin/add-product"
-  },
+  // {
+  //   name: "Add product",
+  //   link: "/admin/add-product"
+  // },
   {
     name: "Manage categories  ",
     link: "/admin/brand"

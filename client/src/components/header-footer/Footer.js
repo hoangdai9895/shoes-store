@@ -27,7 +27,7 @@ const Footer = () => {
           <Col sm="8">
             <h2 className="footer__title"> Be the first to know </h2>
             <div className="footer__intro">
-              Get all information on event, sales and offers.Yan can miss out
+              Get all information on event, sales and offers. You can miss out
             </div>
           </Col>
         </Row>

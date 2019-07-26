@@ -101,6 +101,11 @@ const AddProduct = Loadable({
   loading: SpinnerIcon
 });
 
+const UpdateProduct = Loadable({
+  loader: () => import("./components/admin/UpdateProduct"),
+  loading: SpinnerIcon
+});
+
 const OrderSuccess = Loadable({
   loader: () => import("./components/common/CheckoutSucess"),
   loading: SpinnerIcon
@@ -135,13 +140,18 @@ class App extends Component {
             <Route exact path="/user/information" component={UserInfo} />
             <Route exact path="/user/password" component={UserPassword} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/public/cart" component={PublicCart} />
             <Route exact path="/checkout" component={CheckOut} />
-            <Route exact path="/register" component={Register} />
             <Route exact path="/shop" component={Shop} />
             <Route exact path="/shop/:id" component={Product} />
             <Route exact path="/admin/brand" component={ManageBrand} />
             <Route exact path="/admin/add-product" component={AddProduct} />
+            <Route
+              exact
+              path="/admin/update-product/:id"
+              component={UpdateProduct}
+            />
             <Route exact path="/admin/orders" component={Order} />
             <Route
               exact

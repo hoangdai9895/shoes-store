@@ -3,7 +3,9 @@ import {
     SET_PRODCUTs_LOADING,
     GET_PRODUCT_FILTER,
     ADD_PRODUCT,
-    GET_DETAIL
+    GET_DETAIL,
+    DELETE_PRODUCT,
+    UPDATE_PRODUCT
 } from "../actions/types";
 
 const initialState = {
@@ -11,8 +13,9 @@ const initialState = {
     product: {},
     loading: false,
     success: false,
-    size: null,
-    addProduct: false
+    size: 0,
+    addProduct: false,
+    updateSuccess: false
 };
 
 export default function(state = initialState, action) {
@@ -40,6 +43,10 @@ export default function(state = initialState, action) {
             };
         case GET_DETAIL:
             return {...state, product: action.payload.product, loading: false, success: true }
+        case DELETE_PRODUCT:
+            return {...state, products: state.products.filter(item => item._id !== action.payload.product._id), size: state.size - 1 }
+        case UPDATE_PRODUCT:
+            return {...state, product: action.payload.product, updateSuccess: action.payload.success, }
         default:
             return state;
     }

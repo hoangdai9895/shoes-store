@@ -16,6 +16,8 @@ export const GET_PRODUCT_FILTER = "GET_PRODUCT_FILTER";
 export const GET_FILLTER = "GET_FILLTER";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const GET_DETAIL = "GET_DETAIL";
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 
 //type
 export const GET_ALL_TYPE = "GET_ALL_TYPE";

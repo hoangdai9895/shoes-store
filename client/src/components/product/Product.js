@@ -19,8 +19,13 @@ class Product extends Component {
 
   render() {
     // console.log(this.props.products);
-    const { products } = this.props;
-
+    const { products, errors } = this.props;
+    if (errors.errProductDetail && !products.success)
+      return (
+        <Container>
+          <img src="/img/no_results.png" alt="" className="w-100" />{" "}
+        </Container>
+      );
     return (
       <Container className="my-5">
         <Row>
@@ -48,7 +53,8 @@ class Product extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products
+  products: state.products,
+  errors: state.errors
 });
 
 export default connect(

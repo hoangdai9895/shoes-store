@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import Dropzone from "react-dropzone";
 import SpinnerIcon from "./SpinnerIcon";
-class FileUpload extends Component {
-  state = {
-    uploadFiles: [],
-    uploading: false
-  };
+class FileUpdate extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uploadFiles: null,
+      uploading: false,
+      success: false
+    };
+  }
 
   onDrop = files => {
     // console.log(files);
@@ -49,40 +53,40 @@ class FileUpload extends Component {
     });
   };
 
-  showUploadedImages = () => {
-    if (this.state.uploading)
+  showUploadedImages = success => {
+    if (!success)
       return (
         <li className="img-uploaded">
           <SpinnerIcon />
         </li>
       );
-    return this.state.uploadFiles.map((item, i) => (
-      <li
-        key={i}
-        onClick={() => this.onRemove(item.public_id)}
-        className="img-uploaded"
-      >
-        <img src={item.url} alt="img upload" />
-        <div
-          className="remove-img"
-          onClick={() => this.onRemove(item.public_id)}
-        >
-          <img src="/img/close.png" alt="close img" />
-        </div>
-      </li>
-    ));
+    return (
+      this.state.uploadFiles &&
+      this.state.uploadFiles.map((item, i) => (
+        <li key={i} className="img-uploaded">
+          <img src={item.url} alt="img upload" />
+          <div
+            className="remove-img"
+            onClick={() => this.onRemove(item.public_id)}
+          >
+            <img src="/img/close.png" alt="close img" />
+          </div>
+        </li>
+      ))
+    );
   };
 
   static getDerivedStateFromProps(props, state) {
-    if (props.reset) {
-      return (state = {
-        uploadFiles: []
-      });
+    if ((state.uploadFiles === null && props.images) || props.reset) {
+      return (state = { uploadFiles: props.images });
     }
     return null;
   }
 
   render() {
+    const { success } = this.props;
+    const { uploading } = this.state;
+    // console.log(this.state.uploadFiles);
     return (
       <>
         <Dropzone onDrop={e => this.onDrop(e)}>
@@ -96,7 +100,14 @@ class FileUpload extends Component {
               </div>
               <aside className="mt-3">
                 <h4>Files</h4>
-                <ul className="box-img-upload">{this.showUploadedImages()}</ul>
+                <ul className="box-img-upload">
+                  {this.showUploadedImages(success)}
+                  {uploading ? (
+                    <li className="img-uploaded">
+                      <SpinnerIcon />
+                    </li>
+                  ) : null}
+                </ul>
               </aside>
             </section>
           )}
@@ -106,4 +117,4 @@ class FileUpload extends Component {
   }
 }
 
-export default FileUpload;
+export default FileUpdate;
