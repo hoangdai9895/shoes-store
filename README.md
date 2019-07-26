@@ -8,10 +8,10 @@ Using nodejs api, ReactJs, Mongodb (cloud)
 git clone
 ```
 
-then add .env file in directory
-Mongourl use can create you own database https://cloud.mongodb.com
-secretOrKey for jwt token
-CLOUD_NAME, API_KEY,API_SECRET you can find after create account at cloudinary.com
+- add .env file in directory
+- Mongourl use can create you own database https://cloud.mongodb.com
+- secretOrKey for jwt token
+- CLOUD_NAME, API_KEY,API_SECRET you can find after create account at cloudinary.com
 
 ```
 MONGOURL='yourkey'
