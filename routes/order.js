@@ -29,7 +29,6 @@ router.get(
 
 // get order by id
 router.get("/:id", (req, res) => {
-    // console.log(req.params.id)
     Order.find({ _id: req.params.id })
         .then(order => {
             res.status(200).json({ success: true, order });
@@ -45,7 +44,6 @@ router.post(
     passport.authenticate("jwt", { session: false }),
     admin,
     (req, res) => {
-        // console.log(req.body.id)
         Order.findOne({ _id: req.body.id }).then(order => {
             if (order) {
                 Order.findOneAndUpdate({ _id: req.body.id }, { $set: { isFinished: true } })
@@ -64,7 +62,6 @@ router.post(
     passport.authenticate("jwt", { session: false }),
     admin,
     (req, res) => {
-        // console.log(req.body.id)
         Order.findByIdAndRemove({ _id: req.body.id })
             .then(order =>
                 res.status(200).json({ success: true, orderId: req.body.id })

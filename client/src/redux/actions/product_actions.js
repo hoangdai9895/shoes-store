@@ -49,7 +49,6 @@ export const getProductFilter = (
     };
     dispatch(setProductsLoading());
     axios.post("/api/product/shop", data).then(res => {
-        // console.log(res.data);
         dispatch({
             type: GET_PRODUCT_FILTER,
             payload: res.data

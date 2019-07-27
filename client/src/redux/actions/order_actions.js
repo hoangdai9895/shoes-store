@@ -58,14 +58,12 @@ export const getOrderById = id => dispatch => {
     axios
         .get(`/api/order/${id}`)
         .then(res => {
-            // console.log(res.data)
             dispatch({
                 type: GET_ORDERS_BY_ID,
                 payload: res.data
             });
         })
         .catch(err => {
-            // console.log(err.response)
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

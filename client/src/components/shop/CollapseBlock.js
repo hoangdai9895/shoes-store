@@ -71,7 +71,6 @@ class CollapseBlock extends Component {
 
   render() {
     const { field, type } = this.props;
-    // console.log(this.state.checked);
     return (
       <>
         <ListGroupItem onClick={this.toggle}>

@@ -11,7 +11,6 @@ export const getUser = id => dispatch => {
     axios
         .post("/api/user", data)
         .then(res => {
-            // console.log(res.data);
             dispatch({ type: GET_USER, payload: res.data });
         })
         .catch(err => {
@@ -28,7 +27,6 @@ export const updateInfo = (id, element, type, currentpassword) => dispatch => {
         axios
             .post("/api/user/name", data)
             .then(res => {
-                // console.log()
                 dispatch({ type: UPDATE_USER_INFORMATION_NAME, payload: res.data });
             })
             .catch(err => {

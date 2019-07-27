@@ -15,7 +15,6 @@ export const login = userData => dispatch => {
             dispatch(setCurrentUser(decoded));
         })
         .catch(err => {
-            // console.log(err.response.data, err);
             dispatch(setLoading());
             dispatch({
                 type: GET_ERRORS,
@@ -39,7 +38,6 @@ export const register = userData => dispatch => {
 }
 
 export const setCurrentUser = decoded => {
-    // console.log(decoded);
     return {
         type: SET_CURRENT_USER,
         payload: decoded

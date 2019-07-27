@@ -9,7 +9,6 @@ class FileUpload extends Component {
   };
 
   onDrop = files => {
-    // console.log(files);
     this.setState({
       uploading: true
     });
@@ -18,7 +17,6 @@ class FileUpload extends Component {
     };
     let formData = new FormData();
     formData.append("file", files[0]);
-    // console.log(formData);
     axios.post("/api/product/uploadimage", formData, config).then(res => {
       this.setState(
         {

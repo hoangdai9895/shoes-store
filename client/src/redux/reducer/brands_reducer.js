@@ -15,7 +15,6 @@ export default function(state = initialState, action) {
         case SET_BRANDS_LOADING:
             return {...state, loading: true };
         case GET_ALL_BRANDS:
-            // console.log(action.payload);
             return {...state, list: action.payload, loading: false };
         case ADD_BRAND:
             return {

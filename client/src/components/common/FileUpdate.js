@@ -13,7 +13,6 @@ class FileUpdate extends Component {
   }
 
   onDrop = files => {
-    // console.log(files);
     this.setState({
       uploading: true
     });
@@ -22,7 +21,6 @@ class FileUpdate extends Component {
     };
     let formData = new FormData();
     formData.append("file", files[0]);
-    // console.log(formData);
     axios.post("/api/product/uploadimage", formData, config).then(res => {
       this.setState(
         {
@@ -86,7 +84,6 @@ class FileUpdate extends Component {
   render() {
     const { success } = this.props;
     const { uploading } = this.state;
-    // console.log(this.state.uploadFiles);
     return (
       <>
         <Dropzone onDrop={e => this.onDrop(e)}>

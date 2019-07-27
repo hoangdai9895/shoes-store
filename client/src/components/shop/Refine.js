@@ -28,7 +28,6 @@ class Refine extends Component {
   }
 
   handlePriceFilter = value => {
-    // console.log(typeof value);
     const data = price.list;
     let array = [];
     for (let key in data) {
@@ -40,14 +39,12 @@ class Refine extends Component {
   };
 
   handleFilter = (filters, category) => {
-    // console.log(filters);
     const newFilters = { ...this.state.filters };
     newFilters[category] = filters;
     if (category === "price") {
       let priceValue = this.handlePriceFilter(filters);
       newFilters[category] = priceValue;
     }
-    // console.log(newFilters);
     // get all product filter
     this.props.getProductFilter(0, this.state.limit, newFilters);
     this.setState({
@@ -56,7 +53,6 @@ class Refine extends Component {
   };
 
   render() {
-    // console.log(this.state.filters);
     const { brands, type } = this.props;
     return (
       <>

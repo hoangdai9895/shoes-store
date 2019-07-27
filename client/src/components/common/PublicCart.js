@@ -6,7 +6,6 @@ import { getCartQuantity } from "../../redux/actions/product_actions";
 
 class PublicCart extends Component {
   state = { cart: [] };
-
   changeQuantity = id => e => {
     const { cart } = this.state;
     for (let key in cart) {
@@ -59,13 +58,14 @@ class PublicCart extends Component {
       );
     return cart.map((item, i) => (
       <tr key={item._id}>
-        <td style={{ verticalAlign: "middle" }}> {(i += 1)} </td>
+        <td style={{ verticalAlign: "middle" }}>{(i += 1)}</td>
         <td>
           <div className="image-box-cart">
             <img src={item.image} alt="" />
           </div>
         </td>
-        <td style={{ width: "30%" }}> {item.name} </td> <td> {item.price} </td>
+        <td style={{ width: "30%" }}> {item.name} </td>
+        <td> {item.price} </td>
         <td>
           <div className="input-quantity">
             <input
@@ -97,8 +97,12 @@ class PublicCart extends Component {
         <Table responsive>
           <thead>
             <tr>
-              <th> # </th> <th> Preview </th> <th> Name </th> <th> Price </th>
-              <th> Quantity </th> <th> Total Price </th>
+              <th> # </th>
+              <th> Preview </th>
+              <th> Name </th>
+              <th> Price </th>
+              <th> Quantity </th>
+              <th> Total Price </th>
               <th className="text-center"> Remove </th>
             </tr>
           </thead>

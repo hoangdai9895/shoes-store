@@ -31,7 +31,6 @@ class ImgLightBox extends Component {
   }
 
   render() {
-    // console.log(this.state);
     return (
       <Lightbox
         currentImage={this.state.currentImg}

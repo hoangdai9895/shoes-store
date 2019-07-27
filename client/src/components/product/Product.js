@@ -18,7 +18,6 @@ class Product extends Component {
   }
 
   render() {
-    // console.log(this.props.products);
     const { products, errors } = this.props;
     if (errors.errProductDetail && !products.success)
       return (

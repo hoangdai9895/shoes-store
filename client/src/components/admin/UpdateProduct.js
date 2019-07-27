@@ -73,7 +73,6 @@ class UpdateProduct extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    // console.log(state.updateSuccess);
     if (!state.loadProduct) {
       return (state = {
         loadProduct: props.products.success,
@@ -91,24 +90,20 @@ class UpdateProduct extends Component {
   render() {
     const { brands, type, products, errors } = this.props;
     const { updateSuccess } = this.state;
-    // console.log(this.state);
     if (Object.keys(errors).length !== 0)
       return (
         <Userlayout>
           <img src="/img/no_results.png" alt="" className="w-100" />
         </Userlayout>
       );
-
     return (
       <Userlayout>
         <h2 className="title"> Update Product </h2> <hr />
         <Form onSubmit={e => this.onSubmit(e)}>
           <FileUpdate
             imagesHandler={e => this.imagesHandler(e)}
-            // reset={this.state.updateSuccess}
             success={products.success}
             images={products.product.images}
-            // id={this.props.match.params.id}
           />
           <hr />
           <FormGroup>
@@ -121,7 +116,6 @@ class UpdateProduct extends Component {
               onChange={e => this.onChange(e)}
               required
               value={this.state.name ? this.state.name : ""}
-              // defaultValue={this.state.name}
             />
           </FormGroup>
 
@@ -162,11 +156,7 @@ class UpdateProduct extends Component {
               {this.generateOption(type.list, type.loading, "type")}
             </div>
           </FormGroup>
-          <Button
-            color="primary"
-            className="btn-block"
-            // onClick={e => this.onSubmit(e)}
-          >
+          <Button color="primary" className="btn-block">
             Update Product
           </Button>
         </Form>

@@ -72,7 +72,6 @@ class Checkout extends Component {
 
   render() {
     const { cart } = this.state;
-    // console.log(this.state);
     return (
       <Container className="mt-5">
         <Row>

@@ -43,7 +43,6 @@ class ProductInformation extends Component {
   };
 
   changeQuantity = id => e => {
-    // console.log(e.target.value, id);
     const { cart } = this.state;
     for (let key in cart) {
       if (cart[key]._id === id) {

@@ -83,7 +83,6 @@ class MangeBrands extends Component {
   render() {
     const { disabled, collapse, errorsInput } = this.state;
     const { brands, errors } = this.props;
-    // console.log(brands.brands.success);
     return (
       <Userlayout>
         <h2 className="title"> Manage Brands </h2> <hr />

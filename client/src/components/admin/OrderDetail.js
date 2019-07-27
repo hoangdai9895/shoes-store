@@ -70,7 +70,6 @@ class OrderDetail extends Component {
   };
 
   shipOrder = id => {
-    // console.log(id);
     this.toggle();
     this.props.finishOrder(id, "detail");
   };
@@ -81,7 +80,6 @@ class OrderDetail extends Component {
 
   render() {
     const { errors, order } = this.props;
-    // console.log(order.order[0].items);
     return (
       <Userlayout>
         <div>

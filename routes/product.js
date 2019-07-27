@@ -95,9 +95,7 @@ router.post(
     passport.authenticate("jwt", { session: false }),
     admin,
     (req, res) => {
-        // let image_id = req.query.public_id;
         let image_id = req.body.id;
-        // console.log(req.body.id);
         cloudinary.uploader.destroy(
             image_id,
             err => {
@@ -121,7 +119,6 @@ router.post('/shop/:id', (req, res) => {
 
 //delete product
 router.post('/delete', passport.authenticate('jwt', { session: false }), admin, (req, res) => {
-    // console.log(req.body.listImages.length === 0)
     if (req.body.listImages.length !== 0) {
         cloudinary.v2.api.delete_resources(req.body.listImages).then(results => {
             Product.findByIdAndRemove(req.body.id).then(product => {
@@ -151,7 +148,6 @@ router.post('/update', passport.authenticate('jwt', { session: false }), admin, 
         price: req.body.price,
         images: req.body.images
     }, { new: true }).then(product => {
-        // console.log(product)
         res.status(200).json({ success: true, product })
     }).catch(err => res.status(400).json(err))
 })

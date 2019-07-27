@@ -46,7 +46,6 @@ class ProductImg extends Component {
   };
 
   render() {
-    // console.log(this.state);
     const { product, success } = this.props;
     return (
       <>

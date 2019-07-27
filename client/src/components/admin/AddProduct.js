@@ -24,18 +24,21 @@ class AddProduct extends Component {
     if (loading) return <SpinnerIcon />;
     return (
       <select name={type} onChange={e => this.onChange(e)} required>
-        <option value="default">{`Choose ${type} ...`}</option>
+        <option value="default"> {`Choose ${type} ...`} </option>{" "}
         {data.map(item => (
           <option value={item._id} key={item._id}>
-            {item.name}
+            {" "}
+            {item.name}{" "}
           </option>
-        ))}
+        ))}{" "}
       </select>
     );
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   onSubmit = e => {
@@ -76,7 +79,6 @@ class AddProduct extends Component {
   }
 
   render() {
-    // console.log(this.state);
     const { brands, type, products } = this.props;
     const { addSuccess } = this.state;
     return (
@@ -86,10 +88,10 @@ class AddProduct extends Component {
           <FileUpload
             imagesHandler={e => this.imagesHandler(e)}
             reset={this.state.addSuccess}
-          />
+          />{" "}
           <hr />
           <FormGroup>
-            <Label for="name">Name</Label>
+            <Label for="name"> Name </Label>{" "}
             <Input
               type="text"
               name="name"
@@ -98,11 +100,10 @@ class AddProduct extends Component {
               onChange={e => this.onChange(e)}
               required
               value={this.state.name}
-            />
+            />{" "}
           </FormGroup>
-
           <FormGroup>
-            <Label for="description">Description</Label>
+            <Label for="description"> Description </Label>{" "}
             <Input
               type="text"
               name="description"
@@ -111,11 +112,10 @@ class AddProduct extends Component {
               onChange={e => this.onChange(e)}
               required
               value={this.state.description}
-            />
+            />{" "}
           </FormGroup>
-
           <FormGroup>
-            <Label for="price">Price</Label>
+            <Label for="price"> Price </Label>{" "}
             <Input
               type="number"
               name="price"
@@ -124,38 +124,36 @@ class AddProduct extends Component {
               onChange={e => this.onChange(e)}
               required
               value={this.state.price}
-            />
+            />{" "}
           </FormGroup>
-
           <FormGroup className="d-flex justify-content-between">
             <div className="select-form">
-              <Label for="brand">Brand</Label>
-              {this.generateOption(brands.list, brands.loading, "brand")}
+              <Label for="brand"> Brand </Label>{" "}
+              {this.generateOption(brands.list, brands.loading, "brand")}{" "}
             </div>
-
             <div className="select-form">
-              <Label for="type">Type</Label>
-              {this.generateOption(type.list, type.loading, "type")}
-            </div>
-          </FormGroup>
+              <Label for="type"> Type </Label>{" "}
+              {this.generateOption(type.list, type.loading, "type")}{" "}
+            </div>{" "}
+          </FormGroup>{" "}
           <Button
             color="primary"
             className="btn-block"
             // onClick={e => this.onSubmit(e)}
           >
-            Add Product
-          </Button>
+            Add Product{" "}
+          </Button>{" "}
           <Link
             to="/admin/manage-product"
             className="btn btn-block mt-3 btn-info"
           >
-            Go back admin page
-          </Link>
-        </Form>
-        <hr />
+            Go back admin page{" "}
+          </Link>{" "}
+        </Form>{" "}
+        <hr />{" "}
         {products.addProduct && addSuccess ? (
-          <Alert color="success">Add Product success</Alert>
-        ) : null}
+          <Alert color="success"> Add Product success </Alert>
+        ) : null}{" "}
       </Userlayout>
     );
   }

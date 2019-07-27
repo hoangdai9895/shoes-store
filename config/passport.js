@@ -1,9 +1,6 @@
-// const GooogleStrategy = require("passport-google-oauth20").Strategy;
-// const mongoose = require("mongoose");
 const User = require("../models/Users");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
-// const GooogleStrategy = require("passport-google-token").Strategy;
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.secretOrKey;

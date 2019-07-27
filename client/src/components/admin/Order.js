@@ -20,7 +20,6 @@ class Order extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    // console.log(props.auth.isAdmin);
     if (!props.auth.isAdmin) {
       props.history.push("/shop");
     }
