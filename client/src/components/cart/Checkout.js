@@ -130,7 +130,7 @@ class Checkout extends Component {
           <Col sm="6">
             <h3 className="title">Review Order</h3>
             <hr />
-            <Table borderless>
+            <Table borderless responsive>
               <tbody>{this.generateItem(cart)}</tbody>
             </Table>
             <hr />

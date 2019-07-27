@@ -16,7 +16,7 @@ const CardItem = props => {
   const { item } = props;
   // console.log(item);
   return (
-    <Col sm="4">
+    <Col sm="6" lg="4" xl="3">
       <Card className="mb-4">
         <CardImg
           top

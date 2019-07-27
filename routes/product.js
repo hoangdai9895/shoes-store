@@ -76,7 +76,7 @@ router.post(
         cloudinary.uploader.upload(
             req.files.file.path,
             result => {
-                console.log(result)
+                // console.log(result)
                 res.status(200).send({
                     public_id: result.public_id,
                     url: result.secure_url
@@ -151,7 +151,7 @@ router.post('/update', passport.authenticate('jwt', { session: false }), admin, 
         price: req.body.price,
         images: req.body.images
     }, { new: true }).then(product => {
-        console.log(product)
+        // console.log(product)
         res.status(200).json({ success: true, product })
     }).catch(err => res.status(400).json(err))
 })

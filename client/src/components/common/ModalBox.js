@@ -84,7 +84,7 @@ class ModalBox extends Component {
           </ModalHeader>
           <ModalBody>
             Your cart <span> (1 products) </span>
-            <Table striped>
+            <Table striped responsive>
               <thead>
                 <tr>
                   <th> # </th>

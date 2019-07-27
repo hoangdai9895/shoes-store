@@ -85,7 +85,7 @@ class ProductList extends Component {
             `${products.size} Product`
           )}
         </div>
-        <Table>
+        <Table responsive>
           <thead>
             <tr>
               <th />

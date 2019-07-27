@@ -59,14 +59,13 @@ class PublicCart extends Component {
       );
     return cart.map((item, i) => (
       <tr key={item._id}>
-        <td style={{ verticalAlign: "middle" }}> {(i += 1)}</td>
+        <td style={{ verticalAlign: "middle" }}> {(i += 1)} </td>
         <td>
           <div className="image-box-cart">
             <img src={item.image} alt="" />
           </div>
         </td>
-        <td style={{ width: "30%" }}> {item.name} </td>
-        <td> {item.price} </td>
+        <td style={{ width: "30%" }}> {item.name} </td> <td> {item.price} </td>
         <td>
           <div className="input-quantity">
             <input
@@ -94,16 +93,12 @@ class PublicCart extends Component {
     const { cart } = this.state;
     return (
       <Container>
-        <h2 className="title mt-5">Your Cart</h2>
-        <Table hover>
+        <h2 className="title mt-5"> Your Cart </h2>
+        <Table responsive>
           <thead>
             <tr>
-              <th> # </th>
-              <th> Preview </th>
-              <th> Name </th>
-              <th> Price </th>
-              <th> Quantity </th>
-              <th> Total Price </th>
+              <th> # </th> <th> Preview </th> <th> Name </th> <th> Price </th>
+              <th> Quantity </th> <th> Total Price </th>
               <th className="text-center"> Remove </th>
             </tr>
           </thead>
@@ -111,7 +106,7 @@ class PublicCart extends Component {
             {this.generateListCartItem(cart)}
             <tr>
               <td colSpan="5" />
-              <td>Total</td>
+              <td> Total </td>
               <td className="text-center">
                 <span className="font-weight-bold">
                   $ {this.generateTotal(cart)}

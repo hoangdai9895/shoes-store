@@ -51,7 +51,7 @@ class Header extends Component {
       <Container className="bg-light sticky-top header" fluid>
         <Container className="bg-light">
           <Row>
-            <Col>
+            <Col className="p-0">
               <Navbar color="light" light expand="md">
                 <Link to="/" className="navbar-brand">
                   <img

@@ -12,7 +12,9 @@ class UserInfo extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   updateName = (e, id, type) => {
@@ -42,10 +44,9 @@ class UserInfo extends Component {
     const { user } = this.props;
     return (
       <Userlayout>
-        <h2 className="title">Change user information</h2>
-        <hr />
+        <h2 className="title"> Change user information </h2> <hr />
         <Form onSubmit={e => this.updateName(e, user.user._id, "name")}>
-          <Label for="name">Your name</Label>
+          <Label for="name"> Your name </Label>
           {!user.success ? (
             <SpinnerIcon />
           ) : (
@@ -68,15 +69,16 @@ class UserInfo extends Component {
             </FormGroup>
           )}
         </Form>
-        <Link to="/user/dashboard" className="btn btn-info">
+        <Link to="/user/dashboard" className="btn btn-info btn-block-xs">
           Go back to User page
         </Link>
         <Alert
           color="success"
           isOpen={this.state.visible}
           toggle={this.onDismiss}
+          className="mt-3 text-center"
         >
-          Your name is changed !!
+          Your name is changed!!
         </Alert>
       </Userlayout>
     );

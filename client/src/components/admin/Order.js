@@ -46,21 +46,26 @@ class Order extends Component {
         <td>$ {this.subTotal(e.items)}</td>
         <td>{e.isFinished ? "Complete" : "Pending"}</td>
         <td>
-          <Link className="btn btn-primary mr-1" to={`/admin/orders/${e._id}`}>
-            View
-          </Link>
-          {!e.isFinished ? (
-            <Button
-              color="success"
-              onClick={() => this.props.finishOrder(e._id)}
+          <div className="group-order-actions">
+            <Link
+              className="btn btn-primary mr-1"
+              to={`/admin/orders/${e._id}`}
             >
-              Ship
-            </Button>
-          ) : (
-            <Button color="danger" onClick={() => this.removeOrder(e._id)}>
-              Remove
-            </Button>
-          )}
+              View
+            </Link>
+            {!e.isFinished ? (
+              <Button
+                color="success"
+                onClick={() => this.props.finishOrder(e._id)}
+              >
+                Ship
+              </Button>
+            ) : (
+              <Button color="danger" onClick={() => this.removeOrder(e._id)}>
+                Remove
+              </Button>
+            )}
+          </div>
         </td>
       </tr>
     ));
@@ -87,7 +92,7 @@ class Order extends Component {
         <h2 className="title"> Orders List </h2> <hr />
         <p> You can mange orders here!!! </p>
         <hr />
-        <Table>
+        <Table responsive>
           <thead>
             <tr>
               <th>#</th>

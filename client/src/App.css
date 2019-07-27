@@ -4,6 +4,10 @@
     margin: 0 0 10px 0;
 }
 
+ul {
+    padding: 0;
+}
+
 html,
 body * {
     /* margin: 0;
@@ -589,7 +593,7 @@ ul.box-img-upload li img {
 }
 
 .card-img-top {
-    height: 250px;
+    /* height: 250px; */
 }
 
 .product-image__main-pic {
@@ -789,4 +793,67 @@ h1.product__title {
 .img-list-product img {
     width: 100%;
     height: auto;
+}
+
+
+/* responsive */
+
+@media(max-width:767px) {
+    .header {
+        padding: 0!important;
+    }
+    h2.title {
+        margin: 15px 0;
+        font-size: 16px;
+    }
+    p.lead {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    p.lead a {
+        display: block;
+        margin: 0 0 10px 0!important;
+        width: 100%;
+    }
+    p.lead a button {
+        width: 100%;
+    }
+    .btn-block-xs {
+        width: 100%;
+    }
+    .table thead th {
+        font-size: 13px;
+    }
+    td {
+        font-size: 13px;
+    }
+    .group-order-actions {
+        display: flex;
+        flex-direction: column;
+    }
+    .group-order-actions a:nth-child(1) {
+        margin: 0px 0 5px 0!important;
+    }
+    .login {
+        max-width: 100%;
+    }
+    .container h1 {
+        margin: 20px 0!important;
+        font-size: 35px!important;
+    }
+    .container h1>span {
+        display: block;
+        margin: 0!important;
+    }
+    .promotion .shop-now:nth-child(2) {
+        top: 0%;
+    }
+    .col-sm-9 .col-sm-4 {
+        padding: 0;
+    }
+    .col-sm-9 .col-sm-4:nth-child(1) {
+        margin: 10px 0 0 0;
+    }
 }
