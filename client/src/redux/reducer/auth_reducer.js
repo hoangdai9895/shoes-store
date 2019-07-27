@@ -1,9 +1,10 @@
-import { SET_CURRENT_USER, SET_LOADING } from "../actions/types";
+import { SET_CURRENT_USER, SET_LOADING, REGISTER } from "../actions/types";
 const initialState = {
     isAuthenticated: false,
     user: {},
     isAdmin: false,
-    loading: false
+    loading: false,
+    registerStatus: false
 };
 
 const isEmpty = value =>
@@ -25,6 +26,8 @@ export default function(state = initialState, action) {
                 isAdmin: parseInt(action.payload.role) === 1 ? true : false,
                 loading: false
             };
+        case REGISTER:
+            return {...state, registerStatus: action.payload.success }
         default:
             return state;
     }

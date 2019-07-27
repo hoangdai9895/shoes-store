@@ -1,10 +1,43 @@
 import React, { Component } from "react";
-import { Container, FormGroup, Input, Form } from "reactstrap";
+import { Container, FormGroup, Input, Form, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { register } from "../../redux/actions/auth_actions";
 class Register extends Component {
+  state = {
+    email: "",
+    name: "",
+    password: "",
+    confirmpassword: "",
+    errorsForm: null,
+    success: false
+  };
+
   onChange = e => {
-    console.log("aaa");
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const userData = {
+      email: this.state.email,
+      name: this.state.name,
+      password: this.state.password
+    };
+    if (this.state.password !== this.state.confirmpassword) {
+      this.setState({ errorsForm: "Confirm password not match" });
+    } else {
+      this.props.register(userData);
+      this.setState({ errorsForm: null });
+    }
+  };
+
+  checkError = () => {
+    const { errorsForm } = this.state;
+    const { auth, errors } = this.props;
+    if (errorsForm !== null) return <Alert color="danger">{errorsForm}</Alert>;
+    if (auth.registerStatus) return <Alert color="success">Success !!</Alert>;
+    if (errors.errEmail) return <Alert color="danger">{errors.errEmail}</Alert>;
   };
 
   componentDidMount() {
@@ -21,6 +54,7 @@ class Register extends Component {
 
   render() {
     // console.log(this.props.isAuthenticated);
+    const { errors, auth } = this.props;
     return (
       <Container>
         <div className="register">
@@ -31,7 +65,7 @@ class Register extends Component {
             />
           </div>
           <div className="register__input">
-            <Form>
+            <Form onSubmit={e => this.onSubmit(e)}>
               <FormGroup>
                 <Input
                   type="text"
@@ -39,9 +73,9 @@ class Register extends Component {
                   id="name"
                   placeholder="Your Name"
                   onChange={this.onChange}
+                  required
                 />
               </FormGroup>
-
               <FormGroup>
                 <Input
                   type="email"
@@ -49,9 +83,9 @@ class Register extends Component {
                   id="email"
                   placeholder="Your Email"
                   onChange={this.onChange}
+                  required
                 />
               </FormGroup>
-
               <FormGroup>
                 <Input
                   type="password"
@@ -60,25 +94,26 @@ class Register extends Component {
                   placeholder="Your Password"
                   onChange={this.onChange}
                   autoComplete="email"
+                  required
                 />
               </FormGroup>
-
               <FormGroup>
                 <Input
                   type="password"
-                  name="password"
+                  name="confirmpassword"
                   id="confirmpassword"
                   placeholder="Confirm your password"
                   onChange={this.onChange}
                   autoComplete="email"
+                  required
                 />
               </FormGroup>
+              {this.checkError()}
+              <button className="register__btn my-3"> Sign up </button>
             </Form>
-            <button className="register__btn">Sign up</button>
           </div>
-
           <div className="sign-in">
-            Already have an account? <Link to="/login"> Log in</Link>
+            Already have an account ? <Link to="/login"> Log in </Link>
           </div>
         </div>
       </Container>
@@ -86,9 +121,10 @@ class Register extends Component {
   }
 }
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 export default connect(
   mapStateToProps,
-  {}
+  { register }
 )(Register);

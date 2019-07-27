@@ -856,4 +856,8 @@ h1.product__title {
     .col-sm-9 .col-sm-4:nth-child(1) {
         margin: 10px 0 0 0;
     }
+    .register {
+        /* background-color: #f6f6f6; */
+        max-width: 100%;
+    }
 }

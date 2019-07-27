@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_ERRORS, SET_LOADING } from "./types";
+import { SET_CURRENT_USER, GET_ERRORS, SET_LOADING, REGISTER } from "./types";
 import axios from "axios";
 import setAuthToken from "../../components/common/SetAuthToken";
 import jwt_decode from "jwt-decode";
@@ -23,6 +23,20 @@ export const login = userData => dispatch => {
             });
         });
 };
+
+export const register = userData => dispatch => {
+    axios.post('/api/user/register', userData).then(res => {
+        dispatch({
+            type: REGISTER,
+            payload: res.data
+        })
+    }).catch(err => {
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    })
+}
 
 export const setCurrentUser = decoded => {
     // console.log(decoded);
