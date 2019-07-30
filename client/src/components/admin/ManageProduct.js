@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import Userlayout from "../layout/Userlayout";
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
+import { connect } from "react-redux";
 class ManageProduct extends Component {
+  state = {};
   static getDerivedStateFromProps(props, state) {
-    if (props.auth.user.role !== 1) {
+    console.log(props.auth.use);
+    if (!props.isAdmin) {
       props.history.push("/login");
       return true;
     }
@@ -38,4 +41,8 @@ class ManageProduct extends Component {
   }
 }
 
-export default ManageProduct;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(ManageProduct);

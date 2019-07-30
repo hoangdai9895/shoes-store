@@ -112,7 +112,8 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products
+  products: state.products,
+  auth: state.auth
 });
 
 export default connect(

@@ -6,11 +6,20 @@ import { Link } from "react-router-dom";
 import { getUser } from "../../redux/actions/user_actions";
 import SpinnerIcon from "../common/SpinnerIcon";
 class UserDashboard extends Component {
+  state = {};
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
     this.props.getUser(this.props.auth.user.id);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!nextProps.auth.isAuthenticated) {
+      nextProps.history.push("/login");
+      return true;
+    }
+    return null;
   }
 
   render() {
@@ -41,18 +50,7 @@ class UserDashboard extends Component {
             )}
           </div>
           <div className="lead">
-            Role:{" "}
-            {user.user.role ? (
-              user.user.role === 1 ? (
-                "Admin"
-              ) : (
-                "User"
-              )
-            ) : (
-              <span style={{ verticalAlign: "text-bottom" }}>
-                <SpinnerIcon type="3grow" />
-              </span>
-            )}
+            Role: {user.user.role === 1 ? "Admin" : "User"}
           </div>
           <hr className="my-2" />
           <p>You can change your information and password right here !!</p>
