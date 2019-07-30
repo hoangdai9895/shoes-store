@@ -78,6 +78,14 @@ class OrderDetail extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.auth.user.role !== 1) {
+      props.history.push("/login");
+      return true;
+    }
+    return null;
+  }
+
   render() {
     const { errors, order } = this.props;
     return (

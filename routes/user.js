@@ -92,10 +92,8 @@ router.post(
         const id = req.body.id;
         let newpassword = req.body.newpassword;
         const currentpassword = req.body.currentpassword;
-        // console.log(id, currentpassword);
         User.findById(id)
             .then(user => {
-                // console.log(user);
                 bcrypt
                     .compare(currentpassword, user.password)
                     .then(match => {

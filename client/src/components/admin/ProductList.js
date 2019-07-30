@@ -69,6 +69,14 @@ class ProductList extends Component {
     this.props.getAllProdcuct();
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.auth.user.role !== 1) {
+      props.history.push("/login");
+      return true;
+    }
+    return null;
+  }
+
   render() {
     const { products } = this.props;
     return (

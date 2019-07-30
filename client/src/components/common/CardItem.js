@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 
 const CardItem = props => {
   const { item } = props;
-  // console.log(item);
   return (
     <Col sm="6" md="4" lg="4" xl="4">
       <Card className="mb-4">

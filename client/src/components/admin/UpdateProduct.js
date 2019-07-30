@@ -84,6 +84,10 @@ class UpdateProduct extends Component {
         images: props.products.product.images
       });
     }
+    if (props.auth.user.role !== 1) {
+      props.history.push("/login");
+      return true;
+    }
     return null;
   }
 

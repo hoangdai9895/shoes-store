@@ -3,6 +3,13 @@ import Userlayout from "../layout/Userlayout";
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
 class ManageProduct extends Component {
+  static getDerivedStateFromProps(props, state) {
+    if (props.auth.user.role !== 1) {
+      props.history.push("/login");
+      return true;
+    }
+    return null;
+  }
   render() {
     return (
       <Userlayout>
