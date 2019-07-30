@@ -8,6 +8,7 @@ import { Table } from "reactstrap";
 import { Link } from "react-router-dom";
 import SpinnerIcon from "../common/SpinnerIcon";
 class ProductList extends Component {
+  state = {};
   deleteProduct = product => {
     if (window.confirm("Are you sure ???")) {
       let listImages = [];

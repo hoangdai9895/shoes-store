@@ -6,8 +6,7 @@ import { connect } from "react-redux";
 class ManageProduct extends Component {
   state = {};
   static getDerivedStateFromProps(props, state) {
-    console.log(props.auth.use);
-    if (!props.isAdmin) {
+    if (!props.auth.isAdmin) {
       props.history.push("/login");
       return true;
     }
