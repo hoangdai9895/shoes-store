@@ -19,7 +19,7 @@ class Product extends Component {
 
   render() {
     const { products, errors } = this.props;
-    if (errors.errProductDetail && !products.success)
+    if (!products.success)
       return (
         <Container>
           <img src="/img/no_results.png" alt="" className="w-100" />{" "}
@@ -32,12 +32,12 @@ class Product extends Component {
             {products.loading ? (
               <SpinnerIcon />
             ) : (
-              <ProductImg
-                product={products.product}
-                loading={products.loading}
-                success={products.success}
-              />
-            )}
+                <ProductImg
+                  product={products.product}
+                  loading={products.loading}
+                  success={products.success}
+                />
+              )}
           </Col>
           <Col sm="6">
             <ProductInformation
