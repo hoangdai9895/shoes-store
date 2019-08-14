@@ -795,6 +795,10 @@ h1.product__title {
     height: auto;
 }
 
+.group-order-actions {
+    display: flex;
+}
+
 
 /* responsive */
 

@@ -157,6 +157,7 @@ class OrderDetail extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   order: state.order,
   errors: state.errors
 });
